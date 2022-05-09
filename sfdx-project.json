@@ -6,7 +6,7 @@
     }
   ],
   "name": "cos-connect",
-  "namespace": "",
+  "namespace": "cos_connect",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "54.0"
 }
