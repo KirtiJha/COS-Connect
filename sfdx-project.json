@@ -1,12 +1,19 @@
 {
-  "packageDirectories": [
-    {
-      "path": "force-app",
-      "default": true
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "package": "cos-connect",
+            "versionName": "ver 1.0",
+            "versionNumber": "1.0.0.NEXT",
+            "default": true
+        }
+    ],
+    "name": "cos-connect",
+    "namespace": "cos_connect",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "54.0",
+    "packageAliases": {
+        "cos-connect": "0Ho5j000000PB8kCAG",
+        "cos-connect@1.0.0-1": "04t5j000000UbvVAAS"
     }
-  ],
-  "name": "cos-connect",
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "54.0"
 }

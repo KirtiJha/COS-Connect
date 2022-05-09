@@ -1,0 +1,137 @@
+<template>
+  <div>
+    <div>
+      <table
+        class="slds-table slds-table_bordered slds-border_left slds-border_right"
+        aria-labelledby="element-with-table-label other-element-with-table-label"
+      >
+        <thead>
+          <tr>
+            <th class="slds-text-align_left" scope="col">
+              <div class="slds-truncate">
+                <lightning-icon
+                  icon-name="standard:file"
+                  size="small"
+                  alternative-text="Attachments file"
+                  title="File"
+                ></lightning-icon>
+                &nbsp; Attachments({countAttachments})
+              </div>
+            </th>
+            <th class="slds-text-align_right" scope="col">
+              <div class="slds-truncate">
+                <lightning-input
+                  type="file"
+                  accept={acceptedFormats}
+                  onchange={openfileUpload}
+                  multiple
+                ></lightning-input>
+              </div>
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+
+    <div
+      class="slds-border_bottom slds-border_left slds-border_right"
+      style="height: 200px"
+    >
+      <div class="slds-scrollable_y" style="height: 100%">
+        <table class="slds-table">
+          <tr class="slds-hint-parent">
+            <td data-label="recordName" class="slds-text-align_left">
+              <template if:true={records}>
+                <div class="slds-text-longform">
+                  <template for:each={records} for:item="record">
+                    <p key={record}>
+                      <lightning-icon
+                        icon-name={record.iconname}
+                        size="medium"
+                        alternative-text="Attachment file"
+                        title="Attachment"
+                      ></lightning-icon>
+                      &nbsp;<a
+                        href={record.attachmentUrl}
+                        download
+                        target="_blank"
+                        >{record.filename}</a
+                      >
+                    </p>
+                  </template>
+                </div>
+              </template>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="slds-var-m-around_medium">
+    <template if:true={showModal}>
+      <section role="dialog" tabindex="0" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+          <header class="slds-modal__header">
+            <h3 id="modal-heading-01" class="slds-modal__title slds-hyphenate">
+              Upload file
+            </h3>
+          </header>
+          <div class="slds-modal__content slds-text-align_left">
+            <template if:true={showSpinner}>
+              <lightning-spinner
+                alternative-text="Loading"
+                size="medium"
+              ></lightning-spinner>
+            </template>
+            <template for:each={fileData} for:item="fileItem" for:index="index">
+              <p
+                class="slds-modal__title slds-hyphenate"
+                key={fileItem.fileName}
+              >
+                <lightning-icon
+                  icon-name={fileItem.iconName}
+                  size="medium"
+                  alternative-text="Attachment file"
+                  title="Attachment"
+                ></lightning-icon>
+                {fileItem.fileName} &nbsp;
+                <span
+                  key={fileItem.fileName}
+                  data-id={index}
+                  onclick={removeReceiptImage}
+                  style="
+                    color: blue;
+                    font-weight: bold;
+                    cursor: pointer;
+                    padding: 0px 4px;
+                    border-radius: 50%;
+                    margin: 8px 2px 8px 8px;
+                  "
+                  >x</span
+                ><br />
+                <br />
+              </p>
+            </template>
+          </div>
+          <footer class="slds-modal__footer">
+            <button
+              class="slds-button slds-button_brand"
+              onclick={closeHandler}
+            >
+              <label>Upload</label>
+            </button>
+
+            <button
+              class="slds-button slds-button_brand"
+              onclick={cancelHandler}
+            >
+              <label>Cancel</label>
+            </button>
+          </footer>
+        </div>
+      </section>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+  </div>
+</template>
